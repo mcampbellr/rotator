@@ -4,10 +4,10 @@ const path = require('path')
 const inquirer = require('inquirer')
 const { success, error } = require('./chalker')
 
-// Read the config file and get the json
 const json = config.readConfig()
 const currentPath = process.cwd()
 const pathname = path.basename(currentPath)
+
 const { currentEnv } = json
 
 const markers = async (flags) => {
@@ -61,7 +61,6 @@ const markPath = () => {
 
   if (json[currentEnv][path]) {
     error('Path name already marked')
-    // handle this with a flag?
   } else {
     json[currentEnv][path] = currentPath
     config.writeConfig(json)
@@ -70,7 +69,6 @@ const markPath = () => {
 }
 
 const cleanMarkers = async () => {
-  // get all markers from .rotator.json
   const markers = config.readConfig()
   const { target } = await inquirer.prompt([
     {
@@ -117,9 +115,7 @@ const addEnviroment = async () => {
     }
   ])
 
-  if (json.envs.includes(newEnv)) {
-    return error(`Name ${newEnv} already taken`)
-  }
+  if (json.envs.includes(newEnv)) return error(`Name ${newEnv} already taken`)
 
   json.envs.push(newEnv)
   json[newEnv] = {}

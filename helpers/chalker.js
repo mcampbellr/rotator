@@ -5,11 +5,11 @@ const Color = {
   FgGreen: '\x1b[32m'
 }
 
-function colorString (color, string) {
+const colorString = (color, string) => {
   return `${color}${string}${Color.Reset}`
 }
 
-function colorLog (color, ...args) {
+const colorLog = (color, ...args) => {
   console.log(
     ...args.map((it) => (typeof it === 'string' ? colorString(color, it) : it))
   )

@@ -1,9 +1,9 @@
-const path = require('path')
 const fs = require('fs')
-const dotfiles = process.env.DOTFILES
+const path = require('path')
 
-const config = path.join(dotfiles, '.rotator.json')
+const { DOTFILES } = process.env
 
+const config = path.join(DOTFILES, '.rotator.json')
 const readConfig = () => JSON.parse(fs.readFileSync(config, 'utf8'))
 
 const writeConfig = (newConfig) => {
